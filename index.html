@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Локальный генератор контент-плана для Telegram и ВКонтакте: идеи, форматы и экспорт без регистрации и API.">
+  <title>Контент-планер — план публикаций для ТГ и ВК</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="ambient ambient-one" aria-hidden="true"></div>
+  <div class="ambient ambient-two" aria-hidden="true"></div>
+  <header class="site-header wrap">
+    <a class="brand" href="#top" aria-label="Контент-планер, начало страницы"><span class="brand-mark">К<span>·</span></span><span>контент<span class="brand-light">планер</span></span></a>
+    <span class="local-pill"><span class="local-dot"></span> Работает на твоём компьютере</span>
+  </header>
+
+  <main id="top" class="wrap">
+    <section class="hero" aria-labelledby="heading">
+      <div class="eyebrow"><span class="eyebrow-line"></span> РАБОЧИЙ ИНСТРУМЕНТ ДЛЯ SMM</div>
+      <h1 id="heading">Контент-план,<br><span>который можно взять в работу.</span></h1>
+      <p class="hero-lead">Собери идеи публикаций для Telegram и ВКонтакте на неделю, две или месяц. Укажи нишу, аудиторию и цель — получи темы, форматы, первые строки и призывы к действию.</p>
+      <div class="hero-facts"><span>Без регистрации</span><span class="fact-sep">·</span><span>Без платных API</span><span class="fact-sep">·</span><span>CSV и JSON</span></div>
+    </section>
+
+    <div class="app-layout">
+      <section class="panel settings-panel" aria-labelledby="settings-heading">
+        <div class="panel-top"><div><span class="section-index">01 / НАСТРОЙКИ</span><h2 id="settings-heading">Расскажи о проекте</h2></div><span class="panel-tag">Входные данные</span></div>
+        <form id="plan-form">
+          <div class="field"><label for="niche">Ниша или бизнес <span aria-hidden="true">*</span></label><input id="niche" name="niche" maxlength="100" required placeholder="Например, студия йоги" value="Студия йоги"><p class="hint">Чем занимается бизнес или эксперт</p></div>
+          <div class="field"><label for="product">Что продвигаем <span aria-hidden="true">*</span></label><input id="product" name="product" maxlength="120" required placeholder="Например, занятия для начинающих" value="Групповые занятия для начинающих"></div>
+          <div class="field"><label for="audience">Целевая аудитория <span aria-hidden="true">*</span></label><textarea id="audience" name="audience" maxlength="220" required rows="2" placeholder="Для кого вы работаете">Женщины 25–45 лет, которые хотят меньше стресса и больше движения</textarea></div>
+          <div class="field-grid">
+            <div class="field"><label for="goal">Цель контента</label><select id="goal" name="goal"><option value="trust">Доверие и экспертность</option><option value="sales">Заявки и продажи</option><option value="reach">Охват и узнаваемость</option><option value="engagement">Общение с аудиторией</option></select></div>
+            <div class="field"><label for="tone">Тон общения</label><select id="tone" name="tone"><option value="friendly">Дружелюбный</option><option value="expert">Экспертный</option><option value="energetic">Энергичный</option></select></div>
+          </div>
+          <div class="field-grid">
+            <div class="field"><label for="start-date">Дата первого поста</label><input id="start-date" name="start-date" type="date" required></div>
+            <div class="field"><label for="duration">Период</label><select id="duration" name="duration"><option value="7">7 дней</option><option value="14">14 дней</option><option value="30">30 дней</option></select></div>
+          </div>
+          <fieldset class="field channels"><legend>Площадки</legend><div class="channel-grid"><label class="channel-choice"><input type="checkbox" name="channel" value="telegram" checked><span class="channel-icon tg">T</span><span><strong>Telegram</strong><small>Канал / сообщество</small></span></label><label class="channel-choice"><input type="checkbox" name="channel" value="vk" checked><span class="channel-icon vk">В</span><span><strong>ВКонтакте</strong><small>Группа / паблик</small></span></label></div></fieldset>
+          <p id="form-error" class="form-error" role="alert" hidden></p>
+          <button type="submit" class="btn btn-primary btn-full">Собрать контент-план <span aria-hidden="true">↗</span></button>
+          <button type="button" id="reset-btn" class="btn btn-text btn-full">Сбросить и начать заново</button>
+        </form>
+      </section>
+
+      <section class="results-column" aria-labelledby="results-heading">
+        <div class="panel result-intro">
+          <div class="panel-top"><div><span class="section-index">02 / РЕЗУЛЬТАТ</span><h2 id="results-heading">Твой план публикаций</h2></div><span class="panel-tag accent">Готов к работе</span></div>
+          <div id="empty-state" class="empty-state"><div class="empty-symbol" aria-hidden="true">✳</div><h3>Хороший контент начинается с плана.</h3><p>Заполни поля слева и нажми «Собрать контент-план». Здесь появятся темы публикаций для выбранных площадок.</p><div class="empty-rule" aria-hidden="true"><span></span><span></span><span></span></div></div>
+          <div id="plan-content" hidden>
+            <div class="metrics"><div class="metric"><strong id="metric-posts">0</strong><span>публикаций</span></div><div class="metric"><strong id="metric-days">0</strong><span>дней в плане</span></div><div class="metric"><strong id="metric-channels">0</strong><span>площадки</span></div></div>
+            <div class="plan-toolbar"><div><h3 id="plan-title">Контент-план</h3><p id="plan-subtitle" class="micro"></p></div><div class="export-buttons"><button id="download-csv" type="button" class="btn btn-secondary">CSV <span aria-hidden="true">↓</span></button><button id="download-json" type="button" class="btn btn-secondary">JSON <span aria-hidden="true">↓</span></button></div></div>
+            <div id="cards" class="post-cards" aria-live="polite"></div>
+            <div class="result-note"><strong>Как использовать:</strong> Это идеи и заготовки, а не готовые публикации. Проверь факты, добавь конкретику о продукте и адаптируй текст под голос бренда.</div>
+          </div>
+        </div>
+        <div class="method-note"><span class="method-note-icon" aria-hidden="true">i</span><p><strong>Как это работает.</strong> Генератор использует встроенные сценарии контента и правила, а не внешнюю нейросеть. Все данные обрабатываются прямо в браузере и никуда не отправляются. Это первая версия (MVP).</p></div>
+      </section>
+    </div>
+    <footer class="site-footer"><span>КОНТЕНТ-ПЛАНЕР / MVP 1.0</span><span>Сделано для реальной работы, а не для красивого отчёта.</span></footer>
+  </main>
+</body>
+</html>
